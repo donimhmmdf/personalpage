@@ -36,13 +36,55 @@ darkToggle.addEventListener("click", function () {
     ? html.classList.add("dark")
     : html.classList.remove("dark");
 });
-var myDate = new Date();
-var hrs = myDate.getHours();
 
-var greet;
-
-if (hrs < 12) greet = "Good Morning";
-else if (hrs >= 12 && hrs <= 17) greet = "Good Afternoon";
-else if (hrs >= 17 && hrs <= 24) greet = "Good Evening";
-
-document.getElementById("greetings").innerHTML = greet;
+const observerHero = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-hero");
+      entry.target.classList.remove("hidden-hero");
+    } else {
+      entry.target.classList.remove("show-hero");
+    }
+  });
+});
+const observerPorto = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-porto");
+      entry.target.classList.remove("hidden-porto");
+    } else {
+      entry.target.classList.remove("show-porto");
+      entry.target.classList.add("hidden-porto");
+    }
+  });
+});
+const observerAbout = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-about");
+      entry.target.classList.remove("hidden-about");
+    } else {
+      entry.target.classList.remove("show-about");
+      entry.target.classList.add("hidden-about");
+    }
+  });
+});
+const observerWork = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-work");
+      entry.target.classList.remove("hidden-work");
+    } else {
+      entry.target.classList.remove("show-work");
+      entry.target.classList.add("hidden-work");
+    }
+  });
+});
+const hiddenHero = document.querySelectorAll(".hidden-hero");
+const hiddenPorto = document.querySelectorAll(".hidden-porto");
+const hiddenAbout = document.querySelectorAll(".hidden-about");
+const hiddenWork = document.querySelectorAll(".hidden-work");
+hiddenHero.forEach((el) => observerHero.observe(el));
+hiddenPorto.forEach((el) => observerPorto.observe(el));
+hiddenAbout.forEach((el) => observerAbout.observe(el));
+hiddenWork.forEach((el) => observerWork.observe(el));
